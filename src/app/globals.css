@@ -1,9 +1,17 @@
-/* Import all CSS files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import '../styles/animations.css';
 @import '../styles/navigation.css';
 @import '../styles/projectPopup.css';
+@import '../styles/skills.css';
+@import '../styles/contact.css';
 
 :root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
   --foreground: #000000;
   --background: #ffffff;
   --accent: #0070f3;
