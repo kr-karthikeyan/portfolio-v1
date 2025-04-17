@@ -1,103 +1,279 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import Navigation from "@/components/Navigation";
+import "../styles/animations.css";
 import Image from "next/image";
+import Link from "next/link";
+
+// Sample project data - replace with your actual projects
+const projects = [
+  {
+    title: "Project 1",
+    description: "A brief description of project 1 and its key features. This project demonstrates my skills in web development and problem-solving abilities.",
+    technologies: ["React", "Node.js", "MongoDB"],
+    imageUrl: "/images/project1.jpg",
+    githubUrl: "https://github.com/yourusername/project1",
+    liveUrl: "https://project1-demo.com"
+  },
+  {
+    title: "Project 2",
+    description: "Description of project 2, showcasing different aspects of my development skills and technical expertise.",
+    technologies: ["TypeScript", "Next.js", "PostgreSQL"],
+    imageUrl: "/images/project2.jpg",
+    githubUrl: "https://github.com/yourusername/project2",
+    liveUrl: "https://project2-demo.com"
+  },
+  {
+    title: "Project 3",
+    description: "Overview of project 3, highlighting its unique features and the technologies used in its development.",
+    technologies: ["Vue.js", "Express", "Redis"],
+    imageUrl: "/images/project3.jpg",
+    githubUrl: "https://github.com/yourusername/project3",
+    liveUrl: "https://project3-demo.com"
+  }
+];
+
+// Skills data
+const skills = [
+  {
+    category: "Frontend",
+    items: ["React", "Next.js", "TypeScript", "HTML/CSS", "JavaScript"]
+  },
+  {
+    category: "Backend",
+    items: ["Node.js", "Python", "Express", "Django", "SQL"]
+  },
+  {
+    category: "Database",
+    items: ["MongoDB", "PostgreSQL", "MySQL", "Redis", "Firebase"]
+  },
+  {
+    category: "DevOps",
+    items: ["Git", "Docker", "AWS", "CI/CD", "Linux"]
+  },
+  {
+    category: "Design",
+    items: ["UI/UX", "Figma", "Responsive Design", "CSS Animations", "SASS"]
+  },
+  {
+    category: "Other",
+    items: ["RESTful APIs", "GraphQL", "WebSockets", "Testing", "Agile"]
+  }
+];
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [loading, setLoading] = useState(true);
+  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  useEffect(() => {
+    // Simulate loading time
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleProjectClick = (project: typeof projects[0]) => {
+    setSelectedProject(project);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const handleClosePopup = () => {
+    setSelectedProject(null);
+    document.body.style.overflow = 'unset';
+  };
+
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <div className="loading-spinner" />
+      </div>
+    );
+  }
+
+  return (
+    <main className="main">
+      <Navigation />
+      
+      {/* Background Animation */}
+      <div className="background-animation">
+        <div className="animated-circle" />
+        <div className="animated-circle" />
+        <div className="animated-circle" />
+      </div>
+      
+      {/* Hero Section */}
+      <section className="hero">
+        <div className="hero-animation">
+          <div className="animated-shape" />
+          <div className="animated-shape" />
+          <div className="animated-shape" />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        <div className="hero-content">
+          <h1 className="hero-title">
+            Hi, I'm <span className="gradient-text">Karthik</span>
+          </h1>
+          <p className="hero-subtitle">
+            Full Stack Developer & UI/UX Designer
+          </p>
+          <div className="button-group">
+            <Link href="#projects" className="button button-primary">
+              View Projects
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="section">
+        <div className="section-container">
+          <h2 className="section-title">About Me</h2>
+          <div className="about-grid">
+            <div className="profile-animation">
+              <div className="profile-avatar">
+                <div className="avatar-circle" />
+                <div className="avatar-details" />
+              </div>
+            </div>
+            <div className="about-content">
+              <p>
+                I'm a passionate Full Stack Developer with expertise in building modern web applications.
+                I love creating beautiful and functional user interfaces while ensuring robust backend functionality.
+              </p>
+              <p>
+                With a strong foundation in both frontend and backend development, I strive to create
+                seamless user experiences while ensuring robust and scalable applications.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section id="skills" className="section">
+        <div className="section-container">
+          <h2 className="section-title">Skills & Technologies</h2>
+          <div className="skills-grid">
+            {skills.map((skillGroup) => (
+              <div key={skillGroup.category} className="skill-card">
+                <h3 className="skill-category">{skillGroup.category}</h3>
+                <ul className="skill-list">
+                  {skillGroup.items.map((skill) => (
+                    <li key={skill} className="skill-item">{skill}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects" className="section">
+        <div className="section-container">
+          <h2 className="section-title">My Projects</h2>
+          <div className="projects-grid">
+            {projects.map((project) => (
+              <div
+                key={project.title}
+                className="project-card hover-card"
+                onClick={() => handleProjectClick(project)}
+              >
+                <div className="project-image">
+                  <Image
+                    src={project.imageUrl}
+                    alt={project.title}
+                    width={400}
+                    height={300}
+                  />
+                </div>
+                <div className="project-content">
+                  <h3 className="project-title">{project.title}</h3>
+                  <p className="project-description">{project.description}</p>
+                  <div className="project-tags">
+                    {project.technologies.map((tech) => (
+                      <span key={tech} className="project-tag">{tech}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="section">
+        <div className="section-container">
+          <h2 className="section-title">Get in Touch</h2>
+          <div className="contact-content">
+            <a href="mailto:your.email@example.com" className="contact-email">
+              your.email@example.com
+            </a>
+            <div className="social-links">
+              <a href="https://github.com/yourusername" className="social-link">
+                GitHub
+              </a>
+              <a href="https://linkedin.com/in/yourusername" className="social-link">
+                LinkedIn
+              </a>
+              <a href="https://twitter.com/yourusername" className="social-link">
+                Twitter
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Project Popup */}
+      {selectedProject && (
+        <div className="popup-overlay" onClick={handleClosePopup}>
+          <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+            <button className="popup-close" onClick={handleClosePopup}>×</button>
+            <div className="popup-image">
+              <Image
+                src={selectedProject.imageUrl}
+                alt={selectedProject.title}
+                width={800}
+                height={600}
+              />
+              <div className="popup-animation">
+                <div className="popup-animated-shape" />
+                <div className="popup-animated-shape" />
+                <div className="popup-animated-shape" />
+              </div>
+            </div>
+            <div className="popup-details">
+              <h2>{selectedProject.title}</h2>
+              <p>{selectedProject.description}</p>
+              <div className="popup-tech">
+                {selectedProject.technologies.map((tech) => (
+                  <span key={tech} className="tech-tag">{tech}</span>
+                ))}
+              </div>
+              <div className="popup-links">
+                <a
+                  href={selectedProject.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="popup-link"
+                >
+                  View Project
+                </a>
+                <a
+                  href={selectedProject.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="popup-link"
+                >
+                  GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </main>
   );
 }
